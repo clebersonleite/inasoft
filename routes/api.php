@@ -2,6 +2,7 @@
 
 // use Illuminate\Http\Request;
 
+use App\Http\Controllers\Api\GuestController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::apiResource('users', UserController::class);
+Route::apiResource('guests', GuestController::class);
 
 // Route::delete('/users/{id}', [UserController::class, 'destroy']);
 // Route::patch('/users/{id}', [UserController::class, 'update']);
