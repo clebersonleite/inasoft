@@ -16,6 +16,12 @@ class GuestController extends Controller
         return GuestResource::collection($guests);
     }
 
+    public function indexByChurch(string $id)
+    {
+        $guests = Guest::where('fkCodChurch', $id)->paginate();
+        return GuestResource::collection($guests);
+    }
+
     public function store(StoreUpdateGuestRequest $request)
     {
         $data = $request->validated();

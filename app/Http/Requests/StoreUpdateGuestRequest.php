@@ -21,19 +21,19 @@ class StoreUpdateGuestRequest extends FormRequest
      */
     public function rules(): array
     {
-        $guestId = $this->route('guest');
+        // $guestId = $this->route('guest');
 
         return [
-            'nome' => 'required|min:3|max:255',
+            'nome' => 'nullable|min:3|max:255',
             'email' => [
                 'nullable',
                 'email',
                 'max:255',
-                'unique:guests,email,telefone' . $guestId,
+                // 'unique:guests,email,telefone' . $guestId,
             ],
-            'telefone' => 'required|unique:guests|min:14|max:16',
-            'data_da_visita' => 'required|min:10',
-            'recebeu_jesus' => 'required|min:3',
+            'telefone' => 'nullable|min:14|max:16',
+            'data_da_visita' => 'nullable|min:10',
+            'recebeu_jesus' => 'nullable|min:3',
             'reconciliacao' => 'nullable|min:3',
             'responsavel' => 'nullable|min:3',
             'observacoes' => 'nullable|min:3',

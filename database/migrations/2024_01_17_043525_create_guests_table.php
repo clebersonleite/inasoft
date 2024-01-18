@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('email')->unique();
-            $table->string('telefone')->unique();
+            $table->string('email');
+            $table->string('telefone');
             $table->string('data_da_visita');
             $table->string('recebeu_jesus');
             $table->string('reconciliacao');

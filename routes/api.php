@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('users', UserController::class);
 Route::apiResource('guests', GuestController::class);
+Route::get('guests/church/{fkCodChurch}', [GuestController::class, 'indexByChurch']);
 Route::apiResource('churches', ChurchController::class);
 
 // Route::delete('/users/{id}', [UserController::class, 'destroy']);
