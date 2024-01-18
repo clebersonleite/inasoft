@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateGuestRequest extends FormRequest
+class StoreUpdateChurchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +21,7 @@ class StoreUpdateGuestRequest extends FormRequest
      */
     public function rules(): array
     {
-        $guestId = $this->route('guest');
+        $churchId = $this->route('guest');
 
         return [
             'nome' => 'required|min:3|max:255',
@@ -29,23 +29,18 @@ class StoreUpdateGuestRequest extends FormRequest
                 'nullable',
                 'email',
                 'max:255',
-                'unique:guests,email,telefone' . $guestId,
+                'unique:churches,email,whatsapp' . $churchId,
             ],
-            'telefone' => 'required|unique:guests|min:14|max:16',
-            'data_da_visita' => 'required|min:10',
-            'recebeu_jesus' => 'required|min:3',
-            'reconciliacao' => 'nullable|min:3',
-            'responsavel' => 'nullable|min:3',
-            'observacoes' => 'nullable|min:3',
-            'data_de_nascimento' => 'nullable|min:10',
+            'whatsapp' => 'required|unique:churches|min:14|max:16',
+            'pastor_presidente' => 'required|min:3',
+            'logo' => 'nullable|min:3',
             'logradouro' => 'nullable|min:10',
             'numero' => 'nullable|min:3',
             'bairro' => 'nullable|min:3',
             'cidade' => 'nullable|min:3',
             'estado' => 'nullable|min:2',
             'referencia' => 'nullable|min:3',
-            'cep' => 'nullable|min:9',
-            'fkCodChurch' => 'min:1'
+            'cep' => 'nullable|min:9'
         ];
     }
 }

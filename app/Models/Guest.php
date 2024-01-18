@@ -32,8 +32,14 @@ class Guest extends Model
         'cidade',
         'estado',
         'referencia',
-        'cep'
+        'cep',
+        'fkCodChurch'
     ];
+
+    public function church()
+    {
+        return $this->belongsTo(Church::class, 'fkCodChurch', 'id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

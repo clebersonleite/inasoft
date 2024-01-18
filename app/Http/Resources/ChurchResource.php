@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GuestResource extends JsonResource
+class ChurchResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,13 +19,9 @@ class GuestResource extends JsonResource
             'id' => $this->id,
             'nome' => $this->nome,
             'email' => $this->email,
-            'telefone' => $this->telefone,
-            'data_da_visita' => $this->data_da_visita,
-            'recebeu_jesus' => $this->recebeu_jesus,
-            'reconciliacao' => $this->reconciliacao,
-            'responsavel' => $this->responsavel,
-            'observacoes' => $this->observacoes,
-            'data_de_nascimento' => $this->data_de_nascimento,
+            'whatsapp' => $this->whatsapp,
+            'logo' => $this->logo,
+            'pastor_presidente' => $this->pastor_presidente,
             'logradouro' => $this->logradouro,
             'numero' => $this->numero,
             'bairro' => $this->bairro,
@@ -33,8 +29,6 @@ class GuestResource extends JsonResource
             'estado' => $this->estado,
             'referencia' => $this->referencia,
             'cep' => $this->cep,
-            'fkCodChurch' => $this->fkCodChurch,
-            'church' => new ChurchResource($this->whenLoaded('church')),
             'created' => Carbon::make($this->created_at)->format('Y-m-d H:i:s')
         ];
     }
