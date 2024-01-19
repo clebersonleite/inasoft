@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('guests', function (Blueprint $table) {
-            $table->dropUnique(['email']);
-            $table->dropUnique(['telefone']);
+        Schema::create('departments', function (Blueprint $table) {
+            $table->id();
+            $table->string("nome");
+            $table->timestamps();
         });
     }
 
@@ -22,9 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('guests', function (Blueprint $table) {
-            $table->unique('email');
-            $table->unique('telefone');
-        });
+        Schema::dropIfExists('departments');
     }
 };

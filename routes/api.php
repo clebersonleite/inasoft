@@ -3,8 +3,12 @@
 // use Illuminate\Http\Request;
 
 use App\Http\Controllers\Api\ChurchController;
+use App\Http\Controllers\Api\DepartmentController;
+use App\Http\Controllers\Api\CellController;
 use App\Http\Controllers\Api\GuestController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\MemberController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,10 +16,25 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+//usuários
 Route::apiResource('users', UserController::class);
+
+//igrejas
+Route::apiResource('churches', ChurchController::class);
+
+// visitantes
 Route::apiResource('guests', GuestController::class);
 Route::get('guests/church/{fkCodChurch}', [GuestController::class, 'indexByChurch']);
-Route::apiResource('churches', ChurchController::class);
+
+// membros
+Route::apiResource('members', MemberController::class);
+Route::get('members/church/{fkCodChurch}', [MemberController::class, 'indexByChurch']);
+
+// departamentos
+Route::apiResource('departments', DepartmentController::class);
+// células
+Route::apiResource('cells', CellController::class);
+
 
 // Route::delete('/users/{id}', [UserController::class, 'destroy']);
 // Route::patch('/users/{id}', [UserController::class, 'update']);
