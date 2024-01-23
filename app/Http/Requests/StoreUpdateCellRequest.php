@@ -34,8 +34,8 @@ class StoreUpdateCellRequest extends FormRequest
             'referencia' => 'nullable|min:3',
             'cep' => 'nullable|min:9',
             'fkCodChurch' => 'required|min:1',
-            'fkCodLider' => 'required|min:1',
-            'fkCodLider2' => 'required|min:1'
+            'fkCodLider' => 'nullable|min:1',
+            'fkCodLider2' => 'nullable|min:1'
         ];
     }
 }

@@ -25,11 +25,11 @@ return new class extends Migration
             $table->string('referencia');
             $table->string('cep');
             $table->enum('genero', ['masculino', 'feminino']);
-            $table->enum('estado_civil', ['casado, solteiro, divorciado, viúvo']);
+            $table->enum('estado_civil', ['casado', 'solteiro', 'divorciado', 'viúvo']);
             $table->boolean('batizado');
-            $table->enum('cargo', ['membro, anfitrião, líder, supervisor, coordenador, pastor']);
+            $table->enum('cargo', ['membro', 'anfitrião', 'líder', 'supervisor', 'coordenador', 'pastor']);
 
-            $table->unsignedBigInteger('fkCodDepartment');
+            $table->unsignedBigInteger('fkCodDepartment')->default(null)->nullable();;
 
             $table->foreign('fkCodDepartment')
                 ->references('id')
@@ -37,7 +37,7 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->nullable();
 
-            $table->unsignedBigInteger('fkCodCell');
+            $table->unsignedBigInteger('fkCodCell')->default(null)->nullable();;
 
             $table->foreign('fkCodCell')
                 ->references('id')

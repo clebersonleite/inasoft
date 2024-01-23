@@ -1,0 +1,29 @@
+[33mcommit a3e47381fe26823e12d6e0f076584200e3e4b2a5[m[33m ([m[1;36mHEAD -> [m[1;32mmerge[m[33m, [m[1;31morigin/merge[m[33m)[m
+Author: Cleberson Leite <kleberson1992@gmail.com>
+Date:   Thu Jan 18 22:16:08 2024 -0300
+
+    feat: added departments, cells and members
+
+[33mcommit 23c87031e022bae80bd11281ade2f6073340f988[m
+Author: Cleberson Leite <kleberson1992@gmail.com>
+Date:   Thu Jan 18 15:53:23 2024 -0300
+
+    fix: adjust route and created endpoint for church guest search
+
+[33mcommit 5458e46de047e8fcb98d7168cd5c0dcc3b787b3e[m
+Author: Cleberson Leite <kleberson1992@gmail.com>
+Date:   Thu Jan 18 14:19:43 2024 -0300
+
+    feat: endpoint churches
+
+[33mcommit 23f7aa879463c933beb46a6f8d2869ee11cf0449[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Cleberson Leite <kleberson1992@gmail.com>
+Date:   Wed Jan 17 02:02:26 2024 -0300
+
+    feat: endpoint crud guests
+
+[33mcommit 25ad6a2e0f879a0beee8149427f211f62a002dee[m[33m ([m[1;31morigin/guests[m[33m, [m[1;32mguests[m[33m)[m
+Author: Cleberson Leite <kleberson1992@gmail.com>
+Date:   Tue Jan 16 21:01:48 2024 -0300
+
+    Start Project InaSoft
