@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateCellRequest;
 use App\Http\Resources\CellResource;
 use App\Models\Cell;
+use Carbon\Carbon;
 use Illuminate\Http\Response as HttpResponse;
 
 class CellController extends Controller
@@ -19,7 +20,10 @@ class CellController extends Controller
     public function indexByChurch(string $id)
     {
         $cells = Cell::where('fkCodChurch', $id)->paginate();
-        return CellResource::collection($cells);
+
+        return CellResource::collection($cells)->additional([
+            'count' => $cells->total()
+        ]);
     }
 
     public function store(StoreUpdateCellRequest $request)

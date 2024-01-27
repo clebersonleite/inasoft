@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateMemberRequest;
 use App\Http\Resources\MemberResource;
 use App\Models\Member;
-
+use Carbon\Carbon;
 use Illuminate\Http\Response as HttpResponse;
 
 class MemberController extends Controller
@@ -19,8 +19,20 @@ class MemberController extends Controller
 
     public function indexByChurch(string $id)
     {
-        $members = Member::where('fkCodChurch', $id)->paginate();
-        return MemberResource::collection($members);
+        $currentMonth = Carbon::now()->month;
+
+        $members = Member::where('fkCodChurch', $id)
+            ->orderByDesc('created_at')
+            ->paginate(10);
+        $birthdates = Member::where('fkCodChurch', $id)
+            ->whereMonth('data_de_nascimento', $currentMonth)
+            ->orderByDesc('created_at')
+            ->paginate(10);
+
+        return MemberResource::collection($members)->additional([
+            'count' => $members->total(),
+            'birthdates' => $birthdates
+        ]);
     }
 
     public function store(StoreUpdateMemberRequest $request)

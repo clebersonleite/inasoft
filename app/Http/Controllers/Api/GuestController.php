@@ -18,8 +18,12 @@ class GuestController extends Controller
 
     public function indexByChurch(string $id)
     {
-        $guests = Guest::where('fkCodChurch', $id)->paginate();
-        return GuestResource::collection($guests);
+        $guests = Guest::where('fkCodChurch', $id)
+            ->orderByDesc('created_at')
+            ->paginate(10);
+        return GuestResource::collection($guests)->additional([
+            'count' => $guests->total(),
+        ]);
     }
 
     public function store(StoreUpdateGuestRequest $request)

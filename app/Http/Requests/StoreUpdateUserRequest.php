@@ -25,9 +25,9 @@ class StoreUpdateUserRequest extends FormRequest
         $userId = $this->route('user');
 
         return [
-            'name' => 'required|min:3|max:255',
+            'name' => 'nullable|min:3|max:255',
             'email' => [
-                'required',
+                'nullable',
                 'email',
                 'max:255',
                 'unique:users,email,' . $userId,
@@ -36,7 +36,9 @@ class StoreUpdateUserRequest extends FormRequest
                 'nullable',
                 'min:6',
                 'max:100'
-            ]
+            ],
+            'cargo' => 'nullable',
+            'fkCodChurch' => 'required'
         ];
     }
 }

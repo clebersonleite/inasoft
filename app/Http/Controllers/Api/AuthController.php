@@ -14,10 +14,18 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt($request->only('email', 'password'))) {
+            $user = $request->user();
             $accessToken = $request->user()->createToken('general');
 
             return response()->json([
                 'message' => 'Authorized',
+                'user' => [
+                    'id' => $user->id,
+                    'nome' => $user->name,
+                    'email' => $user->email,
+                    'cargo' => $user->cargo,
+                    'fkCodChurch' => $user->fkCodChurch
+                ],
                 'token' => $accessToken->plainTextToken,
             ], 200);
         }
