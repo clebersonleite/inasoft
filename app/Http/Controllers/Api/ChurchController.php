@@ -6,14 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateChurchRequest;
 use App\Http\Resources\ChurchResource;
 use App\Models\Church;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 
 class ChurchController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $churchs = Church::paginate();
-        return ChurchResource::collection($churchs);
+        $keyword = $request->input('keyword', '');
+
+        if (!empty($keyword)) {
+            $churches = Church::where('nome', 'like', '%' . $keyword . '%')
+                ->orderByDesc('created_at')
+                ->paginate(10);
+        } else {
+            $churches = Church::orderByDesc('created_at')
+                ->paginate(10);
+        }
+
+        return ChurchResource::collection($churches)->additional([
+            'count' => $churches->total(),
+        ]);
     }
 
     public function store(StoreUpdateChurchRequest $request)

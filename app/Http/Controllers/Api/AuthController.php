@@ -19,13 +19,12 @@ class AuthController extends Controller
 
             return response()->json([
                 'message' => 'Authorized',
-                'user' => [
-                    'id' => $user->id,
-                    'nome' => $user->name,
-                    'email' => $user->email,
-                    'cargo' => $user->cargo,
-                    'fkCodChurch' => $user->fkCodChurch
-                ],
+                'id' => $user->id,
+                'nome' => $user->name,
+                'email' => $user->email,
+                'cargo' => $user->cargo,
+                'fkCodChurch' => $user->fkCodChurch,
+                'nomeDaIgreja' => $user->church->nome,
                 'token' => $accessToken->plainTextToken,
             ], 200);
         }

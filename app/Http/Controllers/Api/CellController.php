@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUpdateCellRequest;
 use App\Http\Resources\CellResource;
 use App\Models\Cell;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 
 class CellController extends Controller
@@ -17,12 +18,26 @@ class CellController extends Controller
         return CellResource::collection($cells);
     }
 
-    public function indexByChurch(string $id)
+    public function indexByChurch(string $id, Request $request)
     {
-        $cells = Cell::where('fkCodChurch', $id)->paginate();
+        $keyword = $request->input('keyword', '');
+
+        if (!empty($keyword)) {
+            $cells = Cell::where('fkCodChurch', $id)
+                ->where(function ($query) use ($keyword) {
+                    $query->where('nome', 'like', '%' . $keyword . '%')
+                        ->orWhere('bairro', 'like', '%' . $keyword . '%');
+                })
+                ->orderByDesc('created_at')
+                ->paginate(10);
+        } else {
+            $cells = Cell::where('fkCodChurch', $id)
+                ->orderByDesc('created_at')
+                ->paginate(10);
+        }
 
         return CellResource::collection($cells)->additional([
-            'count' => $cells->total()
+            'count' => $cells->total(),
         ]);
     }
 

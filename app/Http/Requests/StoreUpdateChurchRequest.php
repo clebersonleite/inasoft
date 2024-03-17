@@ -28,19 +28,18 @@ class StoreUpdateChurchRequest extends FormRequest
             'email' => [
                 'nullable',
                 'email',
-                'max:255',
-                'unique:churches,email,whatsapp' . $churchId,
+                'max:255'
             ],
-            'whatsapp' => 'required|unique:churches|min:14|max:16',
-            'pastor_presidente' => 'required|min:3',
-            'logo' => 'nullable|min:3',
-            'logradouro' => 'nullable|min:10',
-            'numero' => 'nullable|min:3',
-            'bairro' => 'nullable|min:3',
-            'cidade' => 'nullable|min:3',
-            'estado' => 'nullable|min:2',
-            'referencia' => 'nullable|min:3',
-            'cep' => 'nullable|min:9'
+            'whatsapp' => 'required|min:14|max:16',
+            'pastor_presidente' => 'required',
+            'logo' => 'nullable',
+            'logradouro' => 'nullable',
+            'numero' => 'nullable',
+            'bairro' => 'nullable',
+            'cidade' => 'nullable',
+            'estado' => 'nullable',
+            'referencia' => 'nullable',
+            'cep' => 'nullable'
         ];
     }
 }

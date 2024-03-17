@@ -6,14 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateDepartmentRequest;
 use App\Http\Resources\DepartmentResource;
 use App\Models\Department;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 
 class DepartmentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $departments = Department::paginate();
-        return DepartmentResource::collection($departments);
+        $keyword = $request->input('keyword', '');
+
+        if (!empty($keyword)) {
+            $departments = Department::where('nome', 'like', '%' . $keyword . '%')
+                ->orderByDesc('created_at')
+                ->paginate(10);
+        } else {
+            $departments = Department::orderByDesc('created_at')
+                ->paginate(10);
+        }
+
+        return DepartmentResource::collection($departments)->additional([
+            'count' => $departments->total(),
+        ]);
     }
 
     public function store(StoreUpdateDepartmentRequest $request)

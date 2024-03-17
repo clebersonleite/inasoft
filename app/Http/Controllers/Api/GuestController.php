@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateGuestRequest;
 use App\Http\Resources\GuestResource;
 use App\Models\Guest;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 
 class GuestController extends Controller
@@ -16,11 +17,25 @@ class GuestController extends Controller
         return GuestResource::collection($guests);
     }
 
-    public function indexByChurch(string $id)
+    public function indexByChurch(string $id, Request $request)
     {
-        $guests = Guest::where('fkCodChurch', $id)
-            ->orderByDesc('created_at')
-            ->paginate(10);
+
+        $keyword = $request->input('keyword', '');
+
+        if (!empty($keyword)) {
+            $guests = Guest::where('fkCodChurch', $id)
+                ->where(function ($query) use ($keyword) {
+                    $query->where('nome', 'like', '%' . $keyword . '%')
+                        ->orWhere('bairro', 'like', '%' . $keyword . '%');
+                })
+                ->orderByDesc('created_at')
+                ->paginate(10);
+        } else {
+            $guests = Guest::where('fkCodChurch', $id)
+                ->orderByDesc('created_at')
+                ->paginate(10);
+        }
+
         return GuestResource::collection($guests)->additional([
             'count' => $guests->total(),
         ]);

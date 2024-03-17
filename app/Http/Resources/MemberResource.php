@@ -27,6 +27,7 @@ class MemberResource extends JsonResource
             'cidade' => $this->cidade,
             'estado' => $this->estado,
             'referencia' => $this->referencia,
+            'cep' => $this->cep,
             'estado_civil' => $this->estado_civil,
             'genero' => $this->genero,
             'batizado' => $this->batizado,

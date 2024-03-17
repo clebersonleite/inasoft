@@ -11,10 +11,23 @@ use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
-        $users = User::paginate();
-        return UserResource::collection($users);
+        $keyword = $request->input('keyword', '');
+
+        if (!empty($keyword)) {
+            $users = User::where('name', 'like', '%' . $keyword . '%')
+                ->orderByDesc('created_at')
+                ->paginate(10);
+        } else {
+            $users = User::orderByDesc('created_at')
+                ->paginate(10);
+        }
+
+        return UserResource::collection($users)->additional([
+            'count' => $users->total(),
+        ]);
     }
 
     public function store(StoreUpdateUserRequest $request)

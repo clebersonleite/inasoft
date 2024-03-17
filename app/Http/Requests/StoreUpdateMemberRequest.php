@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUpdateMemberRequest extends FormRequest
 {
@@ -21,28 +22,38 @@ class StoreUpdateMemberRequest extends FormRequest
      */
     public function rules(): array
     {
+        $memberId = $this->route('id');
         return [
-            'nome' => 'nullable|min:3|max:255',
+            'nome' => 'nullable|min:3',
             'email' => [
                 'nullable',
                 'email',
                 'max:255',
-                // 'unique:guests,email,telefone' . $guestId,
+                // Rule::unique('members')->ignore($memberId)->where(function ($query) {
+                //     return $query->where('email', $this->email);
+                // }),
             ],
-            'telefone' => 'nullable|min:14|max:16',
-            'data_de_nascimento' => 'nullable|min:10',
-            'logradouro' => 'nullable|min:10',
-            'numero' => 'nullable|min:3',
-            'bairro' => 'nullable|min:3',
-            'cidade' => 'nullable|min:3',
-            'estado' => 'nullable|min:2',
-            'referencia' => 'nullable|min:3',
-            'cep' => 'nullable|min:9',
-            'estado_civil' => 'nullable|min:3',
-            'genero' => 'nullable|min:3',
+            'telefone' => [
+                'nullable',
+                // Rule::unique('members')->ignore($memberId)->where(function ($query) {
+                //     return $query->where('nome', $this->nome)
+                //         ->where('telefone', $this->telefone)
+                //         ->where('data_de_nascimento', $this->data_de_nascimento);
+                // }),
+            ],
+            'data_de_nascimento' => 'nullable',
+            'logradouro' => 'nullable',
+            'numero' => 'nullable',
+            'bairro' => 'nullable',
+            'cidade' => 'nullable',
+            'estado' => 'nullable',
+            'referencia' => 'nullable',
+            'cep' => 'nullable',
+            'estado_civil' => 'nullable',
+            'genero' => 'nullable',
             'batizado' => 'nullable',
-            'fkCodDepartment' => 'nullable|min:1',
-            'fkCodCell' => 'nullable|min:1',
+            'fkCodDepartment' => 'nullable',
+            'fkCodCell' => 'nullable',
             'fkCodChurch' => 'min:1'
         ];
     }

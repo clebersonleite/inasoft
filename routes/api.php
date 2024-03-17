@@ -19,6 +19,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //igrejas
     Route::apiResource('churches', ChurchController::class);
+    Route::put('churches/{id}', [ChurchController::class, 'update']);
 
     // visitantes
     Route::apiResource('guests', GuestController::class);

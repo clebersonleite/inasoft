@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUpdateMemberRequest;
 use App\Http\Resources\MemberResource;
 use App\Models\Member;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 
 class MemberController extends Controller
@@ -17,13 +18,25 @@ class MemberController extends Controller
         return MemberResource::collection($members);
     }
 
-    public function indexByChurch(string $id)
+    public function indexByChurch(string $id, Request $request)
     {
         $currentMonth = Carbon::now()->month;
+        $keyword = $request->input('keyword', '');
 
-        $members = Member::where('fkCodChurch', $id)
-            ->orderByDesc('created_at')
-            ->paginate(10);
+        if (!empty($keyword)) {
+            $members = Member::where('fkCodChurch', $id)
+                ->where(function ($query) use ($keyword) {
+                    $query->where('nome', 'like', '%' . $keyword . '%')
+                        ->orWhere('bairro', 'like', '%' . $keyword . '%');
+                })
+                ->orderByDesc('created_at')
+                ->paginate(10);
+        } else {
+            $members = Member::where('fkCodChurch', $id)
+                ->orderByDesc('created_at')
+                ->paginate(10);
+        }
+
         $birthdates = Member::where('fkCodChurch', $id)
             ->whereMonth('data_de_nascimento', $currentMonth)
             ->orderByDesc('created_at')
