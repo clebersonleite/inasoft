@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
+<<<<<<< HEAD
 
     public function index(Request $request)
     {
@@ -28,6 +29,12 @@ class UserController extends Controller
         return UserResource::collection($users)->additional([
             'count' => $users->total(),
         ]);
+=======
+    public function index()
+    {
+        $users = User::paginate();
+        return UserResource::collection($users);
+>>>>>>> origin/master
     }
 
     public function store(StoreUpdateUserRequest $request)

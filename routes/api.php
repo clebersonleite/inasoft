@@ -2,6 +2,7 @@
 
 // use Illuminate\Http\Request;
 
+<<<<<<< HEAD
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ChurchController;
 use App\Http\Controllers\Api\DepartmentController;
@@ -45,6 +46,17 @@ Route::post('members', [MemberController::class, 'store']);
 
 
 
+=======
+use App\Http\Controllers\Api\UserController;
+use Illuminate\Support\Facades\Route;
+
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::apiResource('users', UserController::class);
+>>>>>>> origin/master
 
 // Route::delete('/users/{id}', [UserController::class, 'destroy']);
 // Route::patch('/users/{id}', [UserController::class, 'update']);

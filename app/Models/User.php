@@ -43,9 +43,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+<<<<<<< HEAD
 
     public function church()
     {
         return $this->belongsTo(Church::class, 'fkCodChurch');
     }
+=======
+>>>>>>> origin/master
 }

@@ -21,8 +21,11 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'cargo' => $this->cargo,
+<<<<<<< HEAD
             'fkCodChurch' => $this->fkCodChurch,
             'church' => new ChurchResource($this->whenLoaded('church')),
+=======
+>>>>>>> origin/master
             'created' => Carbon::make($this->created_at)->format('Y-m-d H:i:s')
         ];
     }
